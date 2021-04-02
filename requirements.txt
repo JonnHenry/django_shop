@@ -1,5 +1,4 @@
 asgiref==3.2.10
-<<<<<<< HEAD
 certifi==2020.12.5
 cffi==1.14.5
 chardet==4.0.0
@@ -35,11 +34,10 @@ six==1.15.0
 sqlparse==0.3.1
 urllib3==1.26.4
 whitenoise==5.2.0
-=======
 Django==3.1
 django-crispy-forms==1.9.2
 Pillow==7.2.0
 pytz==2020.1
 six==1.15.0
 sqlparse==0.3.1
->>>>>>> 2960a3c15d128869b5ae620a497dde33bd7d88e9
+
