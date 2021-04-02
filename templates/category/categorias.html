@@ -1,0 +1,15 @@
+<div class="text-center">
+    <h4>Categorias</h4>
+
+    {% for category in categories %}
+        <ul class="list-group">
+            <a class="list-group-item d-flex justify-content-between align-items-center text-dark"
+            href="{% url 'category' category.id %}">
+                <b>{{ category.name }}</b>
+                <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+            </a>
+        </ul>
+
+    {% endfor %}
+    <br>
+</div>

@@ -1,0 +1,81 @@
+{% extends 'layouts/tienda.html' %}
+
+{% load cart_tags %}
+
+{% block title %}E-commerce{% endblock %}
+
+{% block content %}
+    <div class="row ">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xl-2 text-center ">
+            <ul class="list-group text-center">
+                <li class="list-group-item text-center btn-primary rounded">
+                    <a href="{% url 'show' product_id=product.id image=1 %}">
+                        <img src="{{ product.main_image }}" width="75" height="75"
+                             alt="{{ product.name }}" class="rounded">
+                    </a>
+                </li>
+
+                <li class="list-group-item text-center btn-primary rounded">
+                    <a href="{% url 'show' product_id=product.id image=2 %}">
+                        <img src="{{ product.secondary_image }}" width="75" height="75" class="rounded">
+                    </a>
+                </li>
+                <li class="list-group-item text-center btn-primary rounded">
+                    <a href="{% url 'show' product_id=product.id image=3 %}">
+                        <img src="{{ product.thirth_image }}" width="75" height="75" class="rounded">
+                    </a>
+
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 ">
+            <div class="rounded align-content-center border text-center">
+                <img src="{{ top_image }}" width="500" height="500"
+                     alt="{{ product.name }}" class="active rounded img-responsive center-block">
+            </div>
+            <br>
+
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">Caracteristicas</h3>
+                    <textarea class="card-text form-control" rows="10" readonly>{{ product.detail }}</textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">{{ product.name }}</h3>
+                    <h4 class="card-text">$ {{ product.price }}</h4>
+                    <p class="card-text">{{ product.excerpt }}</p>
+                    {% if product.available %}
+                        <a href="{% url 'cart:add_product' product.id %}"
+                           class="btn btn-success btn-lg btn-block">
+                            Añadir al carrito
+                        </a>
+                    {% else %}
+                        <a href="{% url 'cart:add_product' product.id %}"
+                           class="btn btn-success btn-lg btn-block disabled">
+                            Añadir al carrito
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+{% endblock %}

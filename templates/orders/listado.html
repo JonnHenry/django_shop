@@ -1,0 +1,42 @@
+{% extends 'layouts/tienda.html' %}
+
+{% load cart_tags %}
+
+{% block title %}Mis pedidos{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in object_list %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.total|money_format:"$" }}</td>
+                                    <td>{{ order.created_at|date:'d/m/Y H:i' }}</td>
+                                    <td><a href="{% url "order_detail" order.id %}" class="btn btn-info btn-sm">Ver detalle</a></td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="alert alert-danger">No tienes ningún pedido todavía.</div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

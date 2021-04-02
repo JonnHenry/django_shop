@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    {% load static %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}"/>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgba(0, 0, 0, 0.3);>
+    <a class=" navbar-brand
+" href="/">
+<img src="{% static 'img/logo.png' %}" class="card-img-top imagen" width="4%" height="5%" alt="e-commerce"/>
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto col-md-12 col-sm-12 col-lg-12">
+        <li class="nav-item active col-md-2 col-sm-12 col-lg-2 align-content-center text-center">
+            <a class="nav-link" href="/"><b><i class="bi bi-house-door"></i> Home<span class="sr-only">(current)</span></b></a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item col-md-8 col-sm-12 col-lg-8 col-xl-8">
+                <form class="form-inline align-content-center" action="{% url "search" %}" method="GET">
+                    <input class=" form-control mr-sm-2 col-md-6 col-sm-6 col-lg-6"
+                           type="search"
+                           placeholder="Buscar"
+                           aria-label="Search"
+                           name="query">
+                    <button class="btn btn-success my-2 col-md-2 col-sm-2 col-lg-2" type="submit"><i
+                            class="bi bi-search"></i> Buscar
+                    </button>
+                </form>
+            </li>
+            <li class="nav-item dropdown col-md-2 col-sm-12 col-lg-2 align-content-center">
+                <a class="nav-link dropdown-toggle text-center col-md-12 col-sm-12 col-lg-12 col-xl-12" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <img class="img-avatar" src="{% static 'img/avatar.png' %}"> </img>
+                </a>
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                    <label class="dropdown-item disabled text-primary font-weight-light "
+                           href="#">{{ user.username }}</label>
+                    <hr>
+                    <a class="dropdown-item col-md-12 col-sm-12 col-lg-12 col-xl-12" href="{% url "order_list" %}"><i class="bi bi-card-checklist"></i> Mis
+                        pedidos</a>
+                    <a class="dropdown-item col-md-12 col-sm-12 col-lg-12 col-xl-12" href="{% url 'create' %}"><i class="bi bi-bag-plus"></i> Vender
+                        producto</a>
+                    <a class="dropdown-item col-md-12 col-sm-12 col-lg-12 col-xl-12" href="{% url 'salir' %}"><i class="bi bi-box-arrow-right"></i> Cerrar
+                        sesión</a>
+
+                </div>
+            </li>
+        {% else %}
+            <div class="nav-item col-md-6 col-sm-6 col-lg-6">
+            </div>
+
+            <div class="nav-item col-md-4 d-flex col-sm-4 col-lg-4">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'acceder' %}"><b><i class="bi bi-door-open"></i>
+                        Acceder</b></a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="{% url 'registro' %}"><b><i class="bi bi-card-list"></i> Registro</b></a>
+                </li>
+
+            </div>
+        {% endif %}
+    </ul>
+</div>
+
+</nav>
+
+<div class="container-page">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="bg-light text-center text-lg-start fixed-bottom">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        Copyright © 2021 -
+        <a class="text-dark" href="/"><b>Todos los derechos reservados.</b></a>
+    </div>
+
+</footer>
+<!-- Footer -->
+
+
+<script src="{% static 'js/jquery-slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+
+<style>
+    .imagen {
+        background-size: 150px;
+        background-color: white;
+        width: 60px;
+        height: 60px;
+        border: solid 1px #9C9998;
+        border-radius: 10px;
+    }
+
+    .img-avatar {
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .container-page {
+
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+
+
+</style>
+
+
+</html>

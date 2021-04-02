@@ -1,0 +1,14 @@
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <article class="card-body">
+        <br>
+        <h5 class="text-center"><i class="bi bi-plus-square"></i> Agregar categoria</h5>
+        <form method="POST" action="" class="mt-2" autocomplete="false" name="add_category">
+            {% csrf_token %}
+            {{ formCategory|crispy }}
+            <button type="submit" class="btn btn-info btn-block">Agregar Categoria</button>
+        </form>
+        <br>
+    </article>
+</div>

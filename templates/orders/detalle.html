@@ -1,0 +1,45 @@
+{% extends 'layouts/tienda.html' %}
+
+{% load cart_tags %}
+
+{% block title %}Detalle del pedido:{{ order.id }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 ">
+                <h1 class="text-center text-muted">Detalle del pedido N. {{ order.id }}</h1>
+                <table class="table table-bordered rounded">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio/u</th>
+                            <th>Precio total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order_line in order.orderline_set.all %}
+                           <tr class="text-center">
+                                <td>{{ order_line.product.name }}</td>
+                                <td>{{ order_line.quantity }}</td>
+                                <td>{{ order_line.product.price|money_format:"$" }}</td>
+                                <td>{{ order_line.product.price|multiply:order_line.quantity|money_format:"$" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class="text-center">
+                                {{ order.total|money_format:"$" }}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

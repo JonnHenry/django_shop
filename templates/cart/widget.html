@@ -1,0 +1,64 @@
+{% load cart_tags %}
+<table class="table table-bordered col-md-12 col-sm-12 col-lg-3 col-xl-3">
+    <thead>
+    <tr>
+        <th colspan="3" class="text-center">
+            <i class="bi bi-cart3"></i> Carrito de compras
+        </th>
+    </tr>
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if request.session.cart.items %}
+        {% for key, value in request.session.cart.items %}
+            <tr class="text-center">
+                <td>{{ value.name }}</td>
+                <td>{{ value.quantity }}</td>
+                <td>
+                    <a
+                            href="{% url 'cart:add_product' value.product_id %}"
+                            class="btn btn-sm btn-success"
+                    >
+                        +
+                    </a>
+                    <a
+                            href="{% url 'cart:decrement_product' value.product_id %}"
+                            class="ml-2 btn-sm btn btn-danger"
+                    >
+                        -
+                    </a>
+                    <br>
+                    Total {{ value.price|multiply:value.quantity|money_format:"$" }}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="3">
+                <div class="alert alert-danger text-center">
+                    No tienes productos
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="3">
+            Total: {{ cart_total_amount|money_format:"$" }}
+        </td>
+    </tr>
+    {% if request.session.cart.items %}
+        <tr>
+            <td colspan="3">
+                <a href="{% url "process_order" %}" class="btn btn-success">Crear pedido</a>
+            </td>
+        </tr>
+    {% endif %}
+    </tfoot>
+
+</table>
